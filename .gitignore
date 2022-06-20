@@ -1,0 +1,24 @@
+# node_modules and its subdirectories should be ignored
+node_modules
+node_modules/*
+
+# package-lock.json should not be tracked
+package-lock.json
+
+# build folders and dist folders alongside other folders like coverage should be excluded
+build/
+dist/
+coverage/
+out/
+
+# ignore vscode settings
+.vscode
+
+# Ignore zip files
+*.zip
+
+# Ignore macOS system Files
+.DS_Store
+
+# Ignore .env files
+.env
