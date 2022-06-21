@@ -1,19 +1,20 @@
+import formatOutgoingMessage from './socketMessages'
+
 class BankBuddyWebSocket extends WebSocket {
   constructor(url, protocols = []) {
     super(url, protocols);
   }
 
   sendJSONMessage(message) {
-    console.warn('2. Socket Message Sent');
-    super.send(JSON.stringify(message));
+    super.send(JSON.stringify(formatOutgoingMessage(message)));
   }
 
   sendFileMessage(file) {
-    return null;
+    super.send(formatOutgoingMessage(file, { messageType: 'file' }));
   }
 
   sendAudioMessage(audio) {
-    return null;
+    super.send(formatOutgoingMessage(audio, { messageType: 'audio' }));
   }
 }
 
