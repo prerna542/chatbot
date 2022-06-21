@@ -4,6 +4,10 @@
 The enviroment variables for local development are kept in the `.env` file. The webpack script uses `dotenv` to load the variables. In production, the variables can be put into the enviroment directly without any file.  
 
 1. `WEBSOCKET_URL`: The URL of the websocket server.
+2. `TENANT_ID`: The tenant ID of the bot.
+3. `INPUT_ID`: The ID of the HTML Input element where messages are entered.
+4. `SEND_BUTTON_ID`: The ID of the HTML Button element that sends messages.
+5. `MIC_ICON_ID`: The ID of the HTML Button element that starts and stops recording.
 
 ## Scripts
 1. `dev-build`: Produces development build in `dist/`.

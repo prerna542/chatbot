@@ -14,7 +14,7 @@ function formatOutgoingMessage(
   tenant =
     tenant ||
     new URL(window.location.href).searchParams.get('tenant') ||
-    '12345';
+    process.env.TENANT_ID;
 
   let messageObject = { tenant, sender, get_config: getConfig };
 

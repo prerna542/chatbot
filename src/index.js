@@ -8,11 +8,11 @@ import formatOutgoingMessage from './socketMessages';
 import { startAudioRecording, stopAudioRecording } from './audioVideo';
 
 // GLOBAL VARIABLES
-const TEXT_INPUT = document.getElementById('textinput'); // Text input element
-const SEND_BUTTON = document.getElementById('sendbutton'); // Send button element
-const MIC_ICON = document.getElementById('mic-icon');
+const TEXT_INPUT = document.getElementById(process.env.INPUT_ID); // Text input element
+const SEND_BUTTON = document.getElementById(process.env.SEND_BUTTON_ID); // Send button element
+const MIC_ICON = document.getElementById(process.env.MIC_ICON_ID);
 window.RECORDING = false; // A variable indicating if the user is currently recording a message
-window.RECORDER = null;
+window.RECORDER = null; // A reference to the media recorder that is used to record audio and video
 let GLOBAL_WEBSOCKET; // Global websocket variable
 
 async function init() {
