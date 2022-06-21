@@ -5,11 +5,14 @@ import { getDocumentCookies, pressedKeyIsEnter } from './utils';
 import getBrowserFingerPrint, { setClientFingerPrint } from './fingerprint';
 import BankBuddyWebSocket from './ws';
 import formatOutgoingMessage from './socketMessages';
+import { startAudioRecording, stopAudioRecording } from './audioVideo';
 
 // GLOBAL VARIABLES
 const TEXT_INPUT = document.getElementById('textinput'); // Text input element
 const SEND_BUTTON = document.getElementById('sendbutton'); // Send button element
-const MEDIA_RECORDING = false; // A variable indicating if the user is currently recording a message
+const MIC_ICON = document.getElementById('mic-icon');
+window.RECORDING = false; // A variable indicating if the user is currently recording a message
+window.RECORDER = null;
 let GLOBAL_WEBSOCKET; // Global websocket variable
 
 async function init() {
@@ -24,25 +27,25 @@ async function init() {
     cookies['sender'] != undefined &&
     cookies['sender'].length > 0
       ? cookies['sender']
-      : await getBrowserFingerPrint().visitorId;
+      : (await getBrowserFingerPrint()).visitorId;
 
   console.log('1. Browser Fp Sent');
 
   setClientFingerPrint(clientFP);
 
   // STEP 2: CREATE WEBSOCKET
-  GLOBAL_WEBSOCKET = new BankBuddyWebSocket(process.env.WEBSOCKET_URL);
+  window.GLOBAL_WEBSOCKET = new BankBuddyWebSocket(process.env.WEBSOCKET_URL);
 
-  GLOBAL_WEBSOCKET.addEventListener('open', () => {
+  window.GLOBAL_WEBSOCKET.addEventListener('open', () => {
     console.log('WebSocket connected');
-    GLOBAL_WEBSOCKET.sendJSONMessage(
+    window.GLOBAL_WEBSOCKET.sendJSONMessage(
       formatOutgoingMessage('', {
         getConfig: true,
       }),
     );
   });
 
-  GLOBAL_WEBSOCKET.addEventListener('error', (errorEvent) => {
+  window.GLOBAL_WEBSOCKET.addEventListener('error', (errorEvent) => {
     console.log(errorEvent);
   });
 
@@ -52,6 +55,14 @@ async function init() {
     if (pressedKeyIsEnter(keyBoardEvent)) {
       let message = TEXT_INPUT.value;
       GLOBAL_WEBSOCKET.sendMessage(formatOutgoingMessage(message));
+    }
+  });
+
+  MIC_ICON.addEventListener('click', async (clickEvent) => {
+    if (!window.RECORDING) startAudioRecording();
+    else {
+      let audio = await stopAudioRecording();
+      GLOBAL_WEBSOCKET.sendAudioMessage(audio);
     }
   });
 }
