@@ -15,8 +15,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // CUSTOM IMPORTS AND CONSTANTS GO HERE
 const BABEL_OPTIONS = require(resolve(join(DIRNAME, '/babel.config.json')));
 const POSTCSS_OPTIONS = require(resolve(join(DIRNAME, '/postcss.config')));
-let ENVIRONMENT_VARIABLES = DOTENV.config({ path: '.env' }).parsed;
-ENVIRONMENT_VARIABLES = { ...ENVIRONMENT_VARIABLES, ...process.env };
+let ENVIRONMENT_VARIABLES = DOTENV.config({ path: '.env' });
+ENVIRONMENT_VARIABLES = { ...process.env };
 
 /************ Webpack configuration object ************/
 module.exports = {
