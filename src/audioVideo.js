@@ -1,4 +1,8 @@
-import {RecordRTCPromisesHandler} from 'recordrtc'
+/**
+ * @module Audio Video IO
+ * @description Functions that gain access to recording devices, start and stop recording etc
+ */
+import { RecordRTCPromisesHandler } from 'recordrtc';
 
 /**
  * A function that gives access to the camera and microphone of the user device.
@@ -13,16 +17,25 @@ export function getDeviceAccess(audio = true, video = false) {
   return navigator.mediaDevices.getUserMedia({ audio, video });
 }
 
-export async function startAudioRecording(){
-    const stream = await getDeviceAccess(true, false);
-    const recorder = new RecordRTCPromisesHandler(stream,{mimeType: 'audio/webm'});
-    window.RECORDER=recorder;
-    window.RECORDING=true
-    recorder.start();
+/**
+ * Starts recording Audio from microphone and other sources(if available)
+ */
+export async function startAudioRecording() {
+  const stream = await getDeviceAccess(true, false);
+  const recorder = new RecordRTCPromisesHandler(stream, {
+    mimeType: 'audio/webm',
+  });
+  window.RECORDER = recorder;
+  window.RECORDING = true;
+  recorder.startRecording();
 }
 
-export async function stopAudioRecording(){
-    await window.RECORDER.stopRecording();
-    window.RECORDING=false
-    return await window.RECORDER.getBlob();
+/**
+ * Stops the current audio recording and returns the recorded data as an ArrayBuffer
+ * @returns {ArrayBuffer}
+ */
+export async function stopAudioRecording() {
+  await window.RECORDER.stopRecording();
+  window.RECORDING = false;
+  return await (await window.RECORDER.getBlob()).arrayBuffer();
 }

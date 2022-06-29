@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::after,
+*::before{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* MESSAGES AND CHATS CONTAINERS */
+.messages{
+  height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.user_message_container{
+  width: 100%;
+}
+
+.card{
+  margin-bottom: 2rem;
+}
+
+.user_message{
+  border-radius: 2rem 0rem 2rem 2rem;
+  color: white;
+  background-color: rgb(26,31,69);
+  width:fit-content;
+  max-width: 40vh;
+}
+
+
+/* FOOTERS */
+.footer{
+  height: 8.75vh;
+}
+
+.input{
+  border-radius: 10rem;
+  box-shadow: 0px 0px 3px 2px rgba(0,148,246,0.2);
+  outline: none;
+}
+
+.footer .footer_btn{
+  font-size: 2rem;
+  margin:0 0.5rem;
+}
+
+.list li{
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.bottom{
+  bottom:4rem !important;
+}
+
+.border{
+  border: 1px solid black;
+}

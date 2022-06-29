@@ -5,109 +5,112 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amigo Chat Bot</title>
-    <style>
-      *,
-      *::after,
-      *::before {
-        box-sizing: border-box;
-      }
 
-      .navbar__logo {
-        display: inline-block !important;
-        height: 5rem;
-        width: 5rem;
-        margin-right: 2rem;
-      }
-    </style>
+    <!-- FONT AWESOME CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
 
   <body>
-    <input type="text" id="textinput" />
-    <!-- <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i></div>
-    <div class="amigo hidden"> -->
-    <!-- HEADER -->
-    <!-- <header class="amigo__header">
-            <div class="amigo__header--img"> -->
-    <!--        <span class="bg"></span>-->
-    <!-- <img class="bg" src="assets/images/fav.png" alt="logo" />
-            </div>
-            <div class="amigo__header--username">
-                <h3>Welcome User</h3>
-                <small>Hello</small>
-            </div>
-        </header> -->
-    <!-- MAIN CONTENT -->
-    <!-- <div class="amigo__chat__container">
-            <div class="amigo__chat"></div>
-        </div> -->
-    <!-- FOOTER -->
-    <!-- <footer class="amigo__footer">
-            <div class="amigo__footer--questions"></div>
-            <div class="amigo__footer--editor">
-                <div class="amigo__footer--editor-input-container">
-                    <input type="text" class="amigo__footer--editor-input" placeholder="Type a message" />
-                    <span class="menu_icon toggle__widget"><i class="fa-solid fa-paperclip"></i></span>
-                </div>
-                <span class="enter__input send_icon"><i class="fa-regular fa-paper-plane"></i></span>
-                <span class="microphone">
-                    <span class="microphoneStart"><i class="fa-solid fa-microphone-slash"></i></span>
-                    <span class="microphoneStop" hidden><i class="fa-solid fa-microphone"></i></span>
-                </span>
-            </div>
-            <div class="amigo__footer--widget hidden">
-                <div class="amigo__footer--widget-icons hide">
-                    <div class="attachment">
-                        <input type="file" id="file-upload" name="file-upload" class="hidden" />
-                        <label for="file-upload">
-                            <span class="hide hover">
-                                <i class="fa-solid fa-file-upload"></i>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="image_upload">
-                        <input type="file" id="img-upload" name="img-upload" class="hidden" accept="image/*" />
-                        <label for="img-upload">
-                            <span class="hide hover">
-                                <i class="fa-solid fa-image"></i>
-                            </span>
-                        </label>
-                    </div>
-                    <div class="camera_upload">
-                        <span class="hide hover">
-                            <i class="fa-solid fa-camera"></i>
-                        </span>
-                    </div>
-                    <div class="location_upload">
-                        <span class="hide hover">
-                            <i class="fa-solid fa-map-marker-alt"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div> -->
+    <!-- 
+      HEADER contains the image logo, bot heading and subheading
+     -->
+    <header
+      class="header flex items-center justify-items-start bg-sky-500 w-full text-white p-1.5"
+    >
+      <img
+        src="https://devbot.lebara.sa/files/assets/leba-logo.png"
+        alt=""
+        class="img h-16 w-16"
+        id="botImage"
+      />
+      <div class="content flex flex-col justify-items-center ml-4">
+        <h4 id="botHeading" class="font-bold text-2xl">Leba</h4>
+        <p id="botSubheading" class="font-light text-lg">Digital Assistant</p>
+      </div>
+    </header>
 
-    <!-- <div id="dynamic"></div> -->
+    <!-- MAIN contains the messages exchanged during chat. It is flexbox column container with children
+      user_message_container or bot_message_container.
 
-    <!-- card markup -->
-    <!-- <div class="row">
-        <div class="col s12 m6">
-            <div class="card">
-                <div class="card-content">
-                    <p>I am a Simple Card</p>
-                </div>
-                <div class="card-action"><a href="">This is a link</a></div>
-            </div>
+      Both latter containers contain the messages,quick replies etc. The names are self-explanatory
+    -->
+    <main
+      class="messages w-full flex flex-col justify-items-end p-6 mt-2"
+      id="messages"
+    ></main>
+
+    <!-- 
+      FOOTER contains the text input, send button, audio record button and a menu button
+      which includes the other options supported by the bot.
+
+      The menu button opens a tray which has all the said buttons
+     -->
+    <footer class="footer w-full flex items-center p-1.5">
+      <input
+        class="w-auto px-3 py-2 input grow"
+        type="text"
+        id="input"
+        placeholder="Type a message"
+      />
+
+      <div class="icons flex items-center justify-around text-base ml-1">
+        <!-- SEND BUTTON -->
+        <button class="footer_btn text-sky-500" id="send_icon">
+          <span><i class="fa-regular fa-paper-plane"></i></span>
+        </button>
+
+        <!-- MICROPHONE BUTTON -->
+        <button class="footer_btn text-sky-500" id="microphone">
+          <span><i class="fa-solid fa-microphone"></i></span>
+        </button>
+
+        <!-- MENU OR ELLIPSIS BUTTON -->
+        <button
+          class="footer_btn text-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+          id="dropdownButton"
+        >
+          <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+        </button>
+
+        <!-- TRAY FOR CONTAINING THE BUTTONS -->
+        <div
+          id="dropdown"
+          class="z-10 hidden bg-white border divide-y divide-gray-100 rounded shadow-lg w-44 absolute right-2 bottom w-fit"
+        >
+          <ul
+            class="p-2 text-sm text-gray-700 dark:text-gray-200f flex flex-col justify-around list"
+            aria-labelledby="dropdownButton"
+            id="labelButtons"
+          >
+            <!-- <li>
+            <button class="footer_btn text-sky-500">
+              <span><i class="fa-solid fa-camera"></i></span>
+            </button>
+          </li>
+          <li>
+            <button class="footer_btn text-sky-500">
+              <span><i class="fa-solid fa-paperclip"></i></span>
+            </button>
+          </li>
+          <li>
+            <button class="footer_btn text-sky-500">
+              <span><i class="fa-solid fa-image"></i></span>
+            </button>
+          </li>
+          <li>
+            <button class="footer_btn text-sky-500">
+              <span><i class="fa-solid fa-location-pin"></i></span>
+            </button>
+          </li> -->
+          </ul>
         </div>
-
-        <div class="col s12 m6">
-            <div class="card">
-                <div class="card-content">
-                    <p>I am a Simple Card</p>
-                </div>
-                <div class="card-action"><a href="">This is a link</a></div>
-            </div>
-        </div>
-    </div> -->
+      </div>
+    </footer>
   </body>
 </html>
