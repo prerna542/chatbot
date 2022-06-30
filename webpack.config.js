@@ -87,6 +87,7 @@ module.exports = {
       filename: 'index.html',
       title: 'BuddyConsole - A console to manage your BankBuddy interface',
       minify: true,
+      env: ENVIRONMENT_VARIABLES,
     }),
     /* Use a plugin to see bundle sizes */
     new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),

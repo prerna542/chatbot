@@ -27,11 +27,21 @@
         src="https://devbot.lebara.sa/files/assets/leba-logo.png"
         alt=""
         class="img h-16 w-16"
-        id="botImage"
+        id="<%= htmlWebpackPlugin.options.env.BOT_IMAGE %>"
       />
       <div class="content flex flex-col justify-items-center ml-4">
-        <h4 id="botHeading" class="font-bold text-2xl">Leba</h4>
-        <p id="botSubheading" class="font-light text-lg">Digital Assistant</p>
+        <h4
+          id="<%= htmlWebpackPlugin.options.env.BOT_HEADING %>"
+          class="font-bold text-2xl"
+        >
+          Leba
+        </h4>
+        <p
+          id="<%= htmlWebpackPlugin.options.env.BOT_SUBHEADING %>"
+          class="font-light text-lg"
+        >
+          Digital Assistant
+        </p>
       </div>
     </header>
 
@@ -42,7 +52,7 @@
     -->
     <main
       class="messages w-full flex flex-col justify-items-end p-6 mt-2"
-      id="messages"
+      id="<%= htmlWebpackPlugin.options.env.MESSAGES_CONTAINER %>"
     ></main>
 
     <!-- 
@@ -55,25 +65,31 @@
       <input
         class="w-auto px-3 py-2 input grow"
         type="text"
-        id="input"
+        id="<%= htmlWebpackPlugin.options.env.INPUT_ID %>"
         placeholder="Type a message"
       />
 
       <div class="icons flex items-center justify-around text-base ml-1">
         <!-- SEND BUTTON -->
-        <button class="footer_btn text-sky-500" id="send_icon">
+        <button
+          class="footer_btn text-sky-500"
+          id="<%= htmlWebpackPlugin.options.env.SEND_BUTTON_ID %>"
+        >
           <span><i class="fa-regular fa-paper-plane"></i></span>
         </button>
 
         <!-- MICROPHONE BUTTON -->
-        <button class="footer_btn text-sky-500" id="microphone">
+        <button
+          class="footer_btn text-sky-500"
+          id="<%= htmlWebpackPlugin.options.env.MIC_ICON_ID %>"
+        >
           <span><i class="fa-solid fa-microphone"></i></span>
         </button>
 
         <!-- MENU OR ELLIPSIS BUTTON -->
         <button
           class="footer_btn text-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-          id="dropdownButton"
+          id="<%= htmlWebpackPlugin.options.env.DROPDOWN_BUTTON %>"
         >
           <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
         </button>
@@ -86,7 +102,7 @@
           <ul
             class="p-2 text-sm text-gray-700 dark:text-gray-200f flex flex-col justify-around list"
             aria-labelledby="dropdownButton"
-            id="labelButtons"
+            id="<%= htmlWebpackPlugin.options.env.WIDGETS_LIST_UL %>"
           >
             <!-- <li>
             <button class="footer_btn text-sky-500">
